@@ -12,181 +12,276 @@
   <meta property="og:description" content="蜘蛛糸まなのポータルサイト" />
   <meta property="og:image" content="https://kumoito.dev/img/og.png" />
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'sans': ['Inter', 'Noto Sans JP', 'system-ui', 'sans-serif'],
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.6s ease-in-out',
+            'slide-up': 'slideUp 0.8s ease-out',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            slideUp: {
+              '0%': { transform: 'translateY(30px)', opacity: '0' },
+              '100%': { transform: 'translateY(0)', opacity: '1' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <title>蜘蛛糸まなポータル</title>
+  <style>
+    .gradient-bg {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    .card-shadow {
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+    .hover-lift {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .hover-lift:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+    }
+  </style>
 </head>
-<body>
+<body class="bg-white font-sans antialiased">
 <!-- hero - start -->
-<div class="bg-white pb-6 sm:pb-8 lg:pb-12">
-  <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
-    <header class="mb-4 flex items-center justify-between py-4 md:py-8">
-    <section class="min-h-96 relative flex flex-1 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-gray-100 py-16 shadow-lg md:py-20 xl:py-48">
-      <!-- image - start -->
-      <img src="./img/hero.png" loading="lazy" alt="蜘蛛糸まなヘッダーイメージ" class="absolute inset-0 h-full w-full object-cover object-center" />
-      <!-- image - end -->
-
-      <!-- overlay - start -->
-      <div class="absolute inset-0 bg-indigo-500 mix-blend-multiply"></div>
-      <!-- overlay - end -->
-
-      <!-- text start -->
-      <div class="relative flex flex-col items-center p-4 sm:max-w-xl">
-        <p class="mb-4 text-center text-lg text-indigo-200 sm:text-xl md:mb-8">Web Application Engineer</p>
-        <h1 class="mb-8 text-center text-4xl font-bold text-white sm:text-5xl md:mb-12 md:text-6xl">蜘蛛糸まなポータル</h1>
+<div class="bg-white">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <!-- Navigation -->
+    <nav class="flex items-center justify-between py-6">
+      <div class="text-2xl font-bold text-gray-900">蜘蛛糸まな</div>
+    </nav>
+    
+    <!-- Hero Content -->
+    <div class="py-20 sm:py-32">
+      <div class="text-center animate-fade-in">
+        <h1 class="text-5xl font-bold tracking-tight text-gray-900 sm:text-7xl lg:text-8xl">
+          蜘蛛糸まな
+          <span class="block bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+            ポータル
+          </span>
+        </h1>
+        <p class="mt-8 text-xl leading-8 text-gray-600 max-w-2xl mx-auto animate-slide-up">
+          Ruby on Rails をメインにしたウェブアプリケーションエンジニア<br />
+          <span class="text-purple-600 font-medium">Web Application Engineer</span>
+        </p>
+        <div class="mt-12 flex items-center justify-center gap-x-6 animate-slide-up">
+          <a href="#profile" class="rounded-full bg-gray-900 px-8 py-4 text-lg font-semibold text-white shadow-lg hover:bg-gray-800 transition-all duration-300 hover-lift">
+            プロフィールを見る
+          </a>
+          <a href="#links" class="text-lg font-semibold leading-6 text-gray-900 hover:text-purple-600 transition-colors duration-300">
+            各種リンク <span aria-hidden="true">→</span>
+          </a>
+        </div>
       </div>
-      <!-- text end -->
-    </section>
+      
+      <!-- Hero Image -->
+      <div class="mt-20 animate-slide-up">
+        <div class="relative mx-auto max-w-4xl">
+          <div class="absolute inset-0 gradient-bg rounded-3xl blur-3xl opacity-20"></div>
+          <img src="./img/hero.png" alt="蜘蛛糸まなヘッダーイメージ" class="relative rounded-3xl shadow-2xl w-full h-auto card-shadow" />
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 <!-- hero - end -->
 
-<!-- gallery - start -->
-<div class="bg-white py-6 sm:py-8 lg:py-12">
-  <div class="mx-auto max-w-screen-xl px-4 md:px-8">
-    <div class="grid gap-8 md:grid-cols-2 lg:gap-12">
-      <div>
-        <div class="h-64 overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-auto">
+<!-- profile - start -->
+<div id="profile" class="bg-gray-50 py-24 sm:py-32">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="mx-auto max-w-2xl lg:text-center mb-16">
+      <h2 class="text-base font-semibold leading-7 text-purple-600">Profile</h2>
+      <p class="mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+        蜘蛛糸まな
+      </p>
+    </div>
+    
+    <div class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:items-center lg:gap-y-10">
+      <div class="lg:order-last">
+        <div class="aspect-square overflow-hidden rounded-3xl bg-gray-100 card-shadow hover-lift">
           <img src="./img/mana002.png" loading="lazy" alt="mana visual" class="h-full w-full object-cover object-top" />
         </div>
       </div>
-
-      <div class="md:pt-8">
-        <p class="text-center font-bold text-indigo-500 md:text-left">Profile</p>
-
-        <h1 class="mb-4 text-center text-2xl font-bold text-gray-800 sm:text-3xl md:mb-6 md:text-left">蜘蛛糸まな</h1>
-
-        <p class="mb-6 text-gray-500 sm:text-lg md:mb-8">
-          Ruby on Rails をメインにしたウェブアプリケーションエンジニア<br />
-          Rails歴は10年以上、現在は会社員として働きながら、個人として配信活動も行っている<br /><br />
-
-          2017年末にVTuberを知り、その文化に触れ、より近い場所で文化を楽しむために2019年1月よりVTuberとしての活動を開始
-
-          <p>
-            <img src="./img/mana001.png" loading="lazy" alt="mana stand" class="h-auto" />
+      
+      <div class="lg:pr-8">
+        <div class="max-w-xl text-lg leading-8 text-gray-700 lg:max-w-lg">
+          <p class="mb-6">
+            Ruby on Rails をメインにしたウェブアプリケーションエンジニア
           </p>
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- gallery - end -->
-
-<!-- stats - start -->
-<div class="bg-white py-6 sm:py-8 lg:py-12">
-  <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
-    <h2 class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-8 lg:text-3xl">各種リンク</h2>
-
-    <div class="grid grid-cols-2 gap-6 rounded-lg bg-indigo-100 p-6 sm:h-40 sm:content-evenly md:grid-cols-4">
-      <!-- logo - start -->
-      <div class="flex justify-center text-indigo-500">
-        <a href="https://www.twitch.tv/manakumoito" target="_blank" rel="noopener noreferrer">
-          <img src="./img/twitch.svg" loading="lazy" alt="Twitch" class="h-8 w-auto sm:h-10" />
-        </a>
-      </div>
-      <!-- logo - end -->
-
-      <!-- logo - start -->
-      <div class="flex justify-center text-indigo-500">
-        <a href="https://www.youtube.com/@KumoitoMana" target="_blank" rel="noopener noreferrer">
-          <img src="./img/youtube.svg" loading="lazy" alt="Twitch" class="h-8 w-auto sm:h-10" />
-        </a>
-      </div>
-      <!-- logo - end -->
-
-      <!-- logo - start -->
-      <div class="flex justify-center text-indigo-500">
-        <a href="https://twitter.com/HolyGrail" target="_blank" rel="noopener noreferrer">
-          <img src="./img/twitter.svg" loading="lazy" alt="Twitch" class="h-8 w-auto sm:h-10" />
-        </a>
-      </div>
-      <!-- logo - end -->
-
-      <!-- logo - start -->
-      <div class="flex justify-center ext-indigo-500">
-        <a href="https://www.instagram.com/kumoitomana/" target="_blank" rel="noopener noreferrer">
-          <img src="./img/instagram.svg" loading="lazy" alt="Twitch" class="h-8 w-auto sm:h-10" />
-        </a>
-      </div>
-      <!-- logo - end -->
-
-      <!-- logo - start -->
-      <div class="flex justify-center ext-indigo-500">
-        <a href="https://holygrail.fanbox.cc/" target="_blank" rel="noopener noreferrer">
-          <img src="./img/fanbox.svg" loading="lazy" alt="Twitch" class="h-8 w-auto sm:h-10" />
-        </a>
-      </div>
-      <!-- logo - end -->
-
-      <!-- logo - start -->
-      <div class="flex justify-center ext-indigo-500">
-        <a href="https://www.amazon.jp/hz/wishlist/ls/GPN5G32KL6QO?ref_=wl_share" target="_blank" rel="noopener noreferrer">
-          <img src="./img/amazon.svg" loading="lazy" alt="Twitch" class="h-8 w-auto sm:h-10" />
-        </a>
-      </div>
-      <!-- logo - end -->
-    </div>
-  </div>
-</div>
-<!-- stats - end -->
-
-<!-- call to action - start -->
-<div class="bg-white py-6 sm:py-8 lg:py-12">
-  <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
-    <div class="flex flex-col overflow-hidden rounded-lg bg-gray-200 sm:flex-row md:h-80">
-      <!-- image - start -->
-      <div class="order-first h-48 w-full bg-gray-300 sm:order-none sm:h-auto sm:w-1/2 lg:w-2/5">
-        <img src="./img/join-discord.png" loading="lazy" alt="Photo by Andras Vas" class="h-full w-full object-cover object-center" />
-      </div>
-      <!-- image - end -->
-
-      <!-- content - start -->
-      <div class="flex w-full flex-col p-4 sm:w-1/2 sm:p-8 lg:w-3/5">
-        <h2 class="mb-4 text-xl font-bold text-gray-800 md:text-2xl lg:text-4xl">蜘蛛糸まなコミュニティサーバー</h2>
-
-        <p class="mb-8 max-w-md text-gray-600">蜘蛛糸まなコミュニティサーバーは、蜘蛛糸まなが運営するDiscordサーバーです。きたるツイッター終焉の日に備え、友人・知人とコミュニケーションを取ることができる場を作ろうと思い開設。どなたでもご自由にご参加できます。</p>
-
-        <div class="mt-auto">
-          <a href="https://discord.gg/hSmmZ2dD5r" class="inline-block rounded-lg bg-white px-8 py-3 text-center text-sm font-semibold text-gray-800 outline-none ring-indigo-300 transition duration-100 hover:bg-gray-100 focus-visible:ring active:bg-gray-200 md:text-base" target="_blank" rel="noopener noreferrer">Join Discord Server</a>
+          <p class="mb-6">
+            Rails歴は10年以上、現在は会社員として働きながら、個人として配信活動も行っている
+          </p>
+          <p class="mb-8">
+            2017年末にVTuberを知り、その文化に触れ、より近い場所で文化を楽しむために2019年1月よりVTuberとしての活動を開始
+          </p>
+          
+          <div class="mt-12">
+            <div class="rounded-2xl bg-white p-8 card-shadow">
+              <img src="./img/mana001.png" loading="lazy" alt="mana stand" class="h-auto w-full" />
+            </div>
+          </div>
         </div>
       </div>
-      <!-- content - end -->
     </div>
   </div>
 </div>
-<!-- call to action - end -->
+<!-- profile - end -->
 
-<!-- footer - start -->
-<div class="bg-white pt-4 sm:pt-10 lg:pt-12">
-  <footer class="mx-auto max-w-screen-2xl px-4 md:px-8">
-    <div class="flex flex-col items-center justify-between gap-4 border-t border-b py-6 md:flex-row">
-      <!-- nav - start -->
-      <nav class="flex flex-wrap justify-center gap-x-4 gap-y-2 md:justify-start md:gap-6">
-      </nav>
-      <!-- nav - end -->
-
-      <!-- social - start -->
-      <div class="flex gap-4">
-        <a href="https://www.instagram.com/kumoitomana/" target="_blank" class="text-gray-400 transition duration-100 hover:text-gray-500 active:text-gray-600">
-          <svg class="h-5 w-5" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-          </svg>
-        </a>
-
-        <a href="https://twitter.com/HolyGrail" target="_blank" class="text-gray-400 transition duration-100 hover:text-gray-500 active:text-gray-600">
-          <svg class="h-5 w-5" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
-          </svg>
-        </a>
-
-        <a href="https://github.com/HolyGrail" target="_blank" class="text-gray-400 transition duration-100 hover:text-gray-500 active:text-gray-600">
-          <svg class="h-5 w-5" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-          </svg>
-        </a>
-      </div>
-      <!-- social - end -->
+<!-- links - start -->
+<div id="links" class="bg-white py-24 sm:py-32">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="mx-auto max-w-2xl lg:text-center mb-16">
+      <h2 class="text-base font-semibold leading-7 text-purple-600">Social Links</h2>
+      <p class="mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+        各種リンク
+      </p>
     </div>
 
-    <div class="py-8 text-center text-sm text-gray-400">© 2023 - Kumoito Mana. All rights reserved.</div>
+    <div class="mx-auto max-w-5xl">
+      <div class="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-6">
+        <!-- Twitch -->
+        <a href="https://www.twitch.tv/manakumoito" target="_blank" rel="noopener noreferrer" 
+           class="group relative rounded-2xl bg-white p-8 card-shadow hover-lift transition-all duration-300">
+          <div class="flex h-16 w-16 items-center justify-center rounded-xl bg-purple-50 group-hover:bg-purple-100 transition-colors duration-300 mx-auto">
+            <img src="./img/twitch.svg" loading="lazy" alt="Twitch" class="h-8 w-8" />
+          </div>
+          <p class="mt-4 text-center text-sm font-semibold text-gray-900">Twitch</p>
+        </a>
+
+        <!-- YouTube -->
+        <a href="https://www.youtube.com/@KumoitoMana" target="_blank" rel="noopener noreferrer" 
+           class="group relative rounded-2xl bg-white p-8 card-shadow hover-lift transition-all duration-300">
+          <div class="flex h-16 w-16 items-center justify-center rounded-xl bg-red-50 group-hover:bg-red-100 transition-colors duration-300 mx-auto">
+            <img src="./img/youtube.svg" loading="lazy" alt="YouTube" class="h-8 w-8" />
+          </div>
+          <p class="mt-4 text-center text-sm font-semibold text-gray-900">YouTube</p>
+        </a>
+
+        <!-- Twitter -->
+        <a href="https://twitter.com/HolyGrail" target="_blank" rel="noopener noreferrer" 
+           class="group relative rounded-2xl bg-white p-8 card-shadow hover-lift transition-all duration-300">
+          <div class="flex h-16 w-16 items-center justify-center rounded-xl bg-blue-50 group-hover:bg-blue-100 transition-colors duration-300 mx-auto">
+            <img src="./img/twitter.svg" loading="lazy" alt="Twitter" class="h-8 w-8" />
+          </div>
+          <p class="mt-4 text-center text-sm font-semibold text-gray-900">Twitter</p>
+        </a>
+
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/kumoitomana/" target="_blank" rel="noopener noreferrer" 
+           class="group relative rounded-2xl bg-white p-8 card-shadow hover-lift transition-all duration-300">
+          <div class="flex h-16 w-16 items-center justify-center rounded-xl bg-pink-50 group-hover:bg-pink-100 transition-colors duration-300 mx-auto">
+            <img src="./img/instagram.svg" loading="lazy" alt="Instagram" class="h-8 w-8" />
+          </div>
+          <p class="mt-4 text-center text-sm font-semibold text-gray-900">Instagram</p>
+        </a>
+
+        <!-- Fanbox -->
+        <a href="https://holygrail.fanbox.cc/" target="_blank" rel="noopener noreferrer" 
+           class="group relative rounded-2xl bg-white p-8 card-shadow hover-lift transition-all duration-300">
+          <div class="flex h-16 w-16 items-center justify-center rounded-xl bg-orange-50 group-hover:bg-orange-100 transition-colors duration-300 mx-auto">
+            <img src="./img/fanbox.svg" loading="lazy" alt="Fanbox" class="h-8 w-8" />
+          </div>
+          <p class="mt-4 text-center text-sm font-semibold text-gray-900">Fanbox</p>
+        </a>
+
+        <!-- Amazon -->
+        <a href="https://www.amazon.jp/hz/wishlist/ls/GPN5G32KL6QO?ref_=wl_share" target="_blank" rel="noopener noreferrer" 
+           class="group relative rounded-2xl bg-white p-8 card-shadow hover-lift transition-all duration-300">
+          <div class="flex h-16 w-16 items-center justify-center rounded-xl bg-yellow-50 group-hover:bg-yellow-100 transition-colors duration-300 mx-auto">
+            <img src="./img/amazon.svg" loading="lazy" alt="Amazon" class="h-8 w-8" />
+          </div>
+          <p class="mt-4 text-center text-sm font-semibold text-gray-900">Amazon</p>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- links - end -->
+
+<!-- discord cta - start -->
+<div class="bg-gray-50 py-24 sm:py-32">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="relative isolate overflow-hidden rounded-3xl bg-white px-6 py-20 text-center card-shadow sm:px-16">
+      <div class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-2">
+        <!-- content -->
+        <div class="text-left">
+          <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+            蜘蛛糸まな<br/>
+            コミュニティサーバー
+          </h2>
+          <p class="mt-6 text-lg leading-8 text-gray-600">
+            蜘蛛糸まなコミュニティサーバーは、蜘蛛糸まなが運営するDiscordサーバーです。きたるツイッター終焉の日に備え、友人・知人とコミュニケーションを取ることができる場を作ろうと思い開設。どなたでもご自由にご参加できます。
+          </p>
+          <div class="mt-10 flex items-center justify-start gap-x-6">
+            <a href="https://discord.gg/hSmmZ2dD5r" target="_blank" rel="noopener noreferrer" 
+               class="rounded-full bg-gray-900 px-8 py-4 text-lg font-semibold text-white shadow-lg hover:bg-gray-800 transition-all duration-300 hover-lift">
+              Join Discord Server
+            </a>
+          </div>
+        </div>
+        
+        <!-- image -->
+        <div class="relative">
+          <div class="aspect-square overflow-hidden rounded-2xl">
+            <img src="./img/join-discord.png" loading="lazy" alt="Discord Community" class="h-full w-full object-cover object-center" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- discord cta - end -->
+
+<!-- footer - start -->
+<div class="bg-white">
+  <footer class="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+    <div class="border-t border-gray-200 pt-8">
+      <div class="flex flex-col items-center justify-between gap-4 md:flex-row">
+        <!-- brand -->
+        <div class="text-xl font-bold text-gray-900">蜘蛛糸まな</div>
+        
+        <!-- social -->
+        <div class="flex gap-6">
+          <a href="https://www.instagram.com/kumoitomana/" target="_blank" 
+             class="text-gray-400 hover:text-purple-600 transition-colors duration-300">
+            <svg class="h-6 w-6" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+            </svg>
+          </a>
+
+          <a href="https://twitter.com/HolyGrail" target="_blank" 
+             class="text-gray-400 hover:text-purple-600 transition-colors duration-300">
+            <svg class="h-6 w-6" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
+            </svg>
+          </a>
+
+          <a href="https://github.com/HolyGrail" target="_blank" 
+             class="text-gray-400 hover:text-purple-600 transition-colors duration-300">
+            <svg class="h-6 w-6" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+            </svg>
+          </a>
+        </div>
+      </div>
+      
+      <div class="mt-8 border-t border-gray-200 pt-8 text-center">
+        <p class="text-sm text-gray-500">© 2023 - Kumoito Mana. All rights reserved.</p>
+      </div>
+    </div>
   </footer>
 </div>
 <!-- footer - end -->
