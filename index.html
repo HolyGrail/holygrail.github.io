@@ -22,6 +22,10 @@
           animation: {
             'fade-in': 'fadeIn 0.6s ease-in-out',
             'slide-up': 'slideUp 0.8s ease-out',
+            'float': 'float 6s ease-in-out infinite',
+            'pulse': 'pulse-glow 3s ease-in-out infinite',
+            'gradient-shift': 'gradient-shift 15s ease infinite',
+            'text-glow': 'text-glow 3s ease-in-out infinite',
           },
           keyframes: {
             fadeIn: {
@@ -40,34 +44,237 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <title>蜘蛛糸まなポータル</title>
   <style>
-    .gradient-bg {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    @keyframes gradient-shift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      25% { transform: translateY(-10px) rotate(-1deg); }
+      75% { transform: translateY(5px) rotate(1deg); }
+    }
+    
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(102, 126, 234, 0.3), 0 10px 25px -5px rgba(0, 0, 0, 0.1); }
+      50% { box-shadow: 0 0 40px rgba(102, 126, 234, 0.5), 0 20px 40px -10px rgba(0, 0, 0, 0.15); }
+    }
+    
+    @keyframes text-glow {
+      0%, 100% { text-shadow: 0 0 20px rgba(102, 126, 234, 0.5); }
+      50% { text-shadow: 0 0 40px rgba(102, 126, 234, 0.8), 0 0 60px rgba(118, 75, 162, 0.5); }
+    }
+    
+    @keyframes slide-in-right {
+      0% { transform: translateX(100px); opacity: 0; }
+      100% { transform: translateX(0); opacity: 1; }
+    }
+    
+    @keyframes reveal-up {
+      0% { transform: translateY(60px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+    
+    @keyframes hero-image-pan {
+      0%, 100% { transform: scale(1.05); }
+      50% { transform: scale(1.1); }
+    }
+    
+    .gradient-bg {
+      background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #4facfe);
+      background-size: 400% 400%;
+      animation: gradient-shift 15s ease infinite;
+    }
+    
+    .animated-gradient-text {
+      background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #4facfe);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradient-shift 3s ease infinite;
+    }
+    
     .card-shadow {
       box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
+    
     .hover-lift {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
     }
+    
     .hover-lift:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.25);
+    }
+    
+    .hover-lift::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      background: linear-gradient(45deg, #667eea, #764ba2, #f093fb, #4facfe);
+      background-size: 400% 400%;
+      border-radius: inherit;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      z-index: -1;
+      animation: gradient-shift 3s ease infinite;
+    }
+    
+    .hover-lift:hover::before {
+      opacity: 0.7;
+      filter: blur(15px);
+    }
+    
+    .float-animation {
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    .pulse-animation {
+      animation: pulse-glow 3s ease-in-out infinite;
+    }
+    
+    .hero-image-animation {
+      animation: hero-image-pan 20s ease-in-out infinite;
+    }
+    
+    .text-glow {
+      animation: text-glow 3s ease-in-out infinite;
+    }
+    
+    .stagger-animation > * {
+      animation: reveal-up 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+    
+    .stagger-animation > *:nth-child(1) { animation-delay: 0.1s; }
+    .stagger-animation > *:nth-child(2) { animation-delay: 0.2s; }
+    .stagger-animation > *:nth-child(3) { animation-delay: 0.3s; }
+    .stagger-animation > *:nth-child(4) { animation-delay: 0.4s; }
+    .stagger-animation > *:nth-child(5) { animation-delay: 0.5s; }
+    .stagger-animation > *:nth-child(6) { animation-delay: 0.6s; }
+    
+    .parallax-container {
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .magnetic-button {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    .magnetic-button::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+    
+    .magnetic-button:hover::after {
+      width: 300px;
+      height: 300px;
+    }
+    
+    .loading-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s ease;
+      z-index: 9999;
+    }
+    
+    .cursor-glow {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #667eea;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transition: all 0.1s ease;
+      opacity: 0;
+    }
+    
+    .cursor-glow.active {
+      opacity: 1;
+    }
+    
+    /* Smooth scroll behavior */
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 12px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: #f3f4f6;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, #667eea, #764ba2);
+      border-radius: 6px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(180deg, #5a67d8, #6b46c1);
+    }
+    
+    /* Selection color */
+    ::selection {
+      background: rgba(102, 126, 234, 0.3);
+      color: #1f2937;
+    }
+    
+    /* Reveal animation for intersection observer */
+    .observe-fade {
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    
+    .reveal-animated {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
     }
   </style>
 </head>
 <body class="bg-white font-sans antialiased">
+<div class="loading-animation" id="loading-bar"></div>
+<div class="cursor-glow" id="cursor-glow"></div>
 <!-- hero - start -->
 <div class="relative min-h-screen bg-white overflow-hidden">
   <!-- Background Image -->
-  <div class="absolute inset-0">
-    <img src="./img/hero.png" alt="蜘蛛糸まなヘッダーイメージ" class="w-full h-full object-cover object-left sm:object-left lg:object-left" style="object-position: 15% center;" />
-    <div class="absolute inset-0 bg-gradient-to-r from-white/90 via-white/70 to-white/30"></div>
+  <div class="absolute inset-0 parallax-container">
+    <img src="./img/hero.png" alt="蜘蛛糸まなヘッダーイメージ" class="w-full h-full object-cover object-left sm:object-left lg:object-left hero-image-animation" style="object-position: 15% center;" />
+    <div class="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-transparent"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white/20"></div>
   </div>
   
   <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <!-- Navigation -->
     <nav class="flex items-center justify-between py-6">
-      <div class="text-2xl font-bold text-gray-900">蜘蛛糸まな</div>
+      <div class="text-2xl font-bold text-gray-900 animate-fade-in">蜘蛛糸まな</div>
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#profile" class="text-gray-700 hover:text-purple-600 transition-colors duration-300 text-sm font-medium">Profile</a>
+        <a href="#links" class="text-gray-700 hover:text-purple-600 transition-colors duration-300 text-sm font-medium">Links</a>
+        <a href="https://discord.gg/hSmmZ2dD5r" target="_blank" class="text-gray-700 hover:text-purple-600 transition-colors duration-300 text-sm font-medium">Discord</a>
+      </div>
     </nav>
     
     <!-- Hero Content -->
@@ -75,8 +282,8 @@
       <div class="w-full flex justify-end">
         <div class="w-full lg:w-1/2 animate-fade-in">
           <h1 class="text-5xl font-bold tracking-tight text-gray-900 sm:text-7xl lg:text-8xl">
-            蜘蛛糸まな
-            <span class="block bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+            <span class="inline-block animate-fade-in" style="animation-delay: 0.2s;">蜘蛛糸まな</span>
+            <span class="block animated-gradient-text text-glow" style="animation-delay: 0.4s;">
               ポータル
             </span>
           </h1>
@@ -85,7 +292,7 @@
             <span class="text-purple-600 font-medium">Web Application Engineer</span>
           </p>
           <div class="mt-12 flex flex-col sm:flex-row items-start sm:items-center gap-6 animate-slide-up">
-            <a href="#profile" class="rounded-full bg-gray-900 px-8 py-4 text-lg font-semibold text-white shadow-lg hover:bg-gray-800 transition-all duration-300 hover-lift">
+            <a href="#profile" class="rounded-full bg-gray-900 px-8 py-4 text-lg font-semibold text-white shadow-lg hover:bg-gray-800 transition-all duration-300 hover-lift magnetic-button">
               プロフィールを見る
             </a>
             <a href="#links" class="text-lg font-semibold leading-6 text-gray-900 hover:text-purple-600 transition-colors duration-300">
@@ -100,7 +307,7 @@
 <!-- hero - end -->
 
 <!-- profile - start -->
-<div id="profile" class="bg-gray-50 py-24 sm:py-32">
+<div id="profile" class="bg-gray-50 py-24 sm:py-32 observe-fade">
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
     <div class="mx-auto max-w-2xl lg:text-center mb-16">
       <h2 class="text-base font-semibold leading-7 text-purple-600">Profile</h2>
@@ -111,8 +318,8 @@
     
     <div class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:items-center lg:gap-y-10">
       <div class="lg:order-last">
-        <div class="aspect-square overflow-hidden rounded-3xl bg-gray-100 card-shadow hover-lift">
-          <img src="./img/mana002.png" loading="lazy" alt="mana visual" class="h-full w-full object-cover object-top" />
+        <div class="aspect-square overflow-hidden rounded-3xl bg-gray-100 card-shadow hover-lift pulse-animation observe-fade">
+          <img src="./img/mana002.png" loading="lazy" alt="mana visual" class="h-full w-full object-cover object-top float-animation" />
         </div>
       </div>
       
@@ -129,7 +336,7 @@
           </p>
           
           <div class="mt-12">
-            <div class="rounded-2xl bg-white p-8 card-shadow">
+            <div class="rounded-2xl bg-white p-8 card-shadow observe-fade">
               <img src="./img/mana001.png" loading="lazy" alt="mana stand" class="h-auto w-full" />
             </div>
           </div>
@@ -141,7 +348,7 @@
 <!-- profile - end -->
 
 <!-- links - start -->
-<div id="links" class="bg-white py-24 sm:py-32">
+<div id="links" class="bg-white py-24 sm:py-32 observe-fade">
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
     <div class="mx-auto max-w-2xl lg:text-center mb-16">
       <h2 class="text-base font-semibold leading-7 text-purple-600">Social Links</h2>
@@ -151,7 +358,7 @@
     </div>
 
     <div class="mx-auto max-w-5xl">
-      <div class="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-6">
+      <div class="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-6 stagger-animation">
         <!-- Twitch -->
         <a href="https://www.twitch.tv/manakumoito" target="_blank" rel="noopener noreferrer" 
            class="group relative rounded-2xl bg-white p-8 card-shadow hover-lift transition-all duration-300">
@@ -212,7 +419,7 @@
 <!-- links - end -->
 
 <!-- discord cta - start -->
-<div class="bg-gray-50 py-24 sm:py-32">
+<div class="bg-gray-50 py-24 sm:py-32 observe-fade">
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
     <div class="relative isolate overflow-hidden rounded-3xl bg-white px-6 py-20 text-center card-shadow sm:px-16">
       <div class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-2">
@@ -285,5 +492,203 @@
   </footer>
 </div>
 <!-- footer - end -->
+
+<script>
+// Loading animation
+window.addEventListener('load', () => {
+  const loadingBar = document.getElementById('loading-bar');
+  loadingBar.style.transform = 'scaleX(1)';
+  setTimeout(() => {
+    loadingBar.style.opacity = '0';
+  }, 500);
+});
+
+// Smooth scroll with offset for navigation
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  });
+});
+
+// Cursor glow effect
+const cursor = document.getElementById('cursor-glow');
+let mouseX = 0, mouseY = 0;
+let currentX = 0, currentY = 0;
+
+document.addEventListener('mousemove', (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+  cursor.classList.add('active');
+});
+
+document.addEventListener('mouseleave', () => {
+  cursor.classList.remove('active');
+});
+
+// Smooth cursor animation
+function animateCursor() {
+  currentX += (mouseX - currentX) * 0.1;
+  currentY += (mouseY - currentY) * 0.1;
+  
+  cursor.style.left = currentX - 10 + 'px';
+  cursor.style.top = currentY - 10 + 'px';
+  
+  requestAnimationFrame(animateCursor);
+}
+animateCursor();
+
+// Intersection Observer for reveal animations
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      // Only add animation if not already animated
+      if (!entry.target.classList.contains('reveal-animated')) {
+        entry.target.classList.add('reveal-animated');
+      }
+    }
+  });
+}, observerOptions);
+
+// Prepare elements for observation
+document.querySelectorAll('.observe-fade').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  observer.observe(el);
+});
+
+// Parallax effect on scroll
+let ticking = false;
+function updateParallax() {
+  const scrolled = window.pageYOffset;
+  const parallaxElements = document.querySelectorAll('.parallax-container img');
+  
+  parallaxElements.forEach(el => {
+    const speed = 0.5;
+    const yPos = -(scrolled * speed);
+    el.style.transform = `translateY(${yPos}px) scale(1.1)`;
+  });
+  
+  ticking = false;
+}
+
+function requestTick() {
+  if (!ticking) {
+    requestAnimationFrame(updateParallax);
+    ticking = true;
+  }
+}
+
+window.addEventListener('scroll', requestTick);
+
+// Magnetic button effect
+document.querySelectorAll('.magnetic-button').forEach(button => {
+  button.addEventListener('mousemove', (e) => {
+    const rect = button.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    
+    button.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px)`;
+  });
+  
+  button.addEventListener('mouseleave', () => {
+    button.style.transform = 'translate(0, 0)';
+  });
+});
+
+// Dynamic gradient animation on mouse move
+const heroSection = document.querySelector('.gradient-bg, .animated-gradient-text');
+if (heroSection) {
+  document.addEventListener('mousemove', (e) => {
+    const x = e.clientX / window.innerWidth;
+    const y = e.clientY / window.innerHeight;
+    
+    const gradientElements = document.querySelectorAll('.animated-gradient-text');
+    gradientElements.forEach(el => {
+      el.style.backgroundPosition = `${x * 100}% ${y * 100}%`;
+    });
+  });
+}
+
+// Text scramble effect on hover
+class TextScramble {
+  constructor(el) {
+    this.el = el;
+    this.chars = '!<>-_\\/[]{}—=+*^?#________';
+    this.update = this.update.bind(this);
+  }
+  
+  setText(newText) {
+    const oldText = this.el.innerText;
+    const length = Math.max(oldText.length, newText.length);
+    const promise = new Promise((resolve) => this.resolve = resolve);
+    this.queue = [];
+    for (let i = 0; i < length; i++) {
+      const from = oldText[i] || '';
+      const to = newText[i] || '';
+      const start = Math.floor(Math.random() * 40);
+      const end = start + Math.floor(Math.random() * 40);
+      this.queue.push({ from, to, start, end });
+    }
+    cancelAnimationFrame(this.frameRequest);
+    this.frame = 0;
+    this.update();
+    return promise;
+  }
+  
+  update() {
+    let output = '';
+    let complete = 0;
+    for (let i = 0, n = this.queue.length; i < n; i++) {
+      let { from, to, start, end, char } = this.queue[i];
+      if (this.frame >= end) {
+        complete++;
+        output += to;
+      } else if (this.frame >= start) {
+        if (!char || Math.random() < 0.28) {
+          char = this.randomChar();
+          this.queue[i].char = char;
+        }
+        output += `<span style="color: #667eea;">${char}</span>`;
+      } else {
+        output += from;
+      }
+    }
+    this.el.innerHTML = output;
+    if (complete === this.queue.length) {
+      this.resolve();
+    } else {
+      this.frameRequest = requestAnimationFrame(this.update);
+      this.frame++;
+    }
+  }
+  
+  randomChar() {
+    return this.chars[Math.floor(Math.random() * this.chars.length)];
+  }
+}
+
+// Apply text scramble to headings on hover
+const headings = document.querySelectorAll('h1, h2');
+headings.forEach(heading => {
+  const fx = new TextScramble(heading);
+  const originalText = heading.innerText;
+  
+  heading.addEventListener('mouseenter', () => {
+    fx.setText(originalText);
+  });
+});
+</script>
 </body>
 </html>
