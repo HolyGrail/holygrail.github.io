@@ -24,8 +24,8 @@ Ruby on Rails エンジニア / VTuber 蜘蛛糸まなの配信・SNS・コミ�
 ├── sitemap-main.xml # ルート配下ページ用 sitemap
 ├── tier-table-maker/
 │   └── sitemap.xml # tier-table-maker 用 sitemap
-├── grbr-cals/
-│   └── sitemap.xml # grbr-cals 用 sitemap
+├── grbr-calc/
+│   └── sitemap.xml # grbr-calc 用 sitemap
 ├── favicon.png    # ファビコン
 └── img/           # 画像アセット
     ├── hero.png        # ヒーロー背景画像
@@ -53,9 +53,9 @@ open index.html
 - Search Console は `kumoito.dev` の Domain プロパティを主に運用する（DNS TXT 検証を推奨）。
 - サービス単位の可視化が必要な場合は、補助的に URL プレフィックスを追加する。
   - `https://kumoito.dev/tier-table-maker/`
-  - `https://kumoito.dev/grbr-cals/`
+  - `https://kumoito.dev/grbr-calc/`
 - `robots.txt` は `https://kumoito.dev/sitemap.xml`（sitemap index）を参照する。
 - sitemap index は以下を集約する。
   - `https://kumoito.dev/sitemap-main.xml`
   - `https://kumoito.dev/tier-table-maker/sitemap.xml`
-  - `https://kumoito.dev/grbr-cals/sitemap.xml`
+  - `https://kumoito.dev/grbr-calc/sitemap.xml`
