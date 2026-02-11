@@ -12,8 +12,29 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **単一ファイル構成**: サイト全体が `index.html` 1ファイルで完成（HTML + CSS + JS をインライン記述）
 - **Tailwind CSS**: CDN (`cdn.tailwindcss.com`) 経由。カスタム設定は `tailwind.config` オブジェクトで定義（フォント: Inter + Noto Sans JP、fade-in / slide-up アニメーション）
 - **Google Fonts**: Inter（英文）と Noto Sans JP（和文）を `preload` で読み込み
+- **Google Analytics**: `G-FDEZFMDWSK`（gtag.js 経由）
 - **ビルドツール**: なし。ビルドステップ不要
 - **デプロイ**: `main` ブランチへの push で GitHub Pages に自動デプロイ
+
+## ファイル構成
+
+```
+├── index.html              # メインページ（HTML + CSS + JS）
+├── CNAME                   # カスタムドメイン設定（kumoito.dev）
+├── favicon.png             # ファビコン
+├── robots.txt              # クローラー向け設定
+├── sitemap.xml             # サイトマップインデックス
+├── sitemap-main.xml        # メインサイト用サイトマップ
+├── sitemap-grbr-calc.xml   # grbr-calc サービス用サイトマップ
+├── sitemap-tier-table-maker.xml  # tier-table-maker サービス用サイトマップ
+├── img/                    # 画像アセット
+│   ├── hero.png            # ヒーロー背景
+│   ├── og.png              # OGP 画像
+│   ├── mana001.png, mana002.png  # 立ち絵
+│   ├── join-discord.png    # Discord CTA 画像
+│   └── *.svg               # SNS アイコン（twitch, youtube, twitter, instagram, fanbox, amazon）
+└── README.md
+```
 
 ## 開発方法
 
@@ -53,3 +74,5 @@ open index.html
 - コミットメッセージは日本語で書く
 - 外部リンク（SNS URL、Discord 招待リンク等）は本人の実アカウントなので、変更時は必ず確認を取ること
 - 外部リンクには必ず `target="_blank" rel="noopener noreferrer"` を付与すること
+- `sitemap.xml` はサイトマップインデックス形式。新サービス追加時は個別サイトマップ（`sitemap-{service}.xml`）を作成し、`sitemap.xml` に `<sitemap>` エントリを追加すること
+- `robots.txt` は `sitemap.xml` を参照している。サイトマップのパスを変更した場合は `robots.txt` も更新すること
