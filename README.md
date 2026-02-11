@@ -22,10 +22,8 @@ Ruby on Rails エンジニア / VTuber 蜘蛛糸まなの配信・SNS・コミ�
 ├── robots.txt     # クローラー向け設定（sitemap 参照を含む）
 ├── sitemap.xml    # sitemap index（全体入口）
 ├── sitemap-main.xml # ルート配下ページ用 sitemap
-├── tier-table-maker/
-│   └── sitemap.xml # tier-table-maker 用 sitemap
-├── grbr-calc/
-│   └── sitemap.xml # grbr-calc 用 sitemap
+├── sitemap-tier-table-maker.xml # tier-table-maker 用 sitemap
+├── sitemap-grbr-calc.xml # grbr-calc 用 sitemap
 ├── favicon.png    # ファビコン
 └── img/           # 画像アセット
     ├── hero.png        # ヒーロー背景画像
@@ -57,5 +55,6 @@ open index.html
 - `robots.txt` は `https://kumoito.dev/sitemap.xml`（sitemap index）を参照する。
 - sitemap index は以下を集約する。
   - `https://kumoito.dev/sitemap-main.xml`
-  - `https://kumoito.dev/tier-table-maker/sitemap.xml`
-  - `https://kumoito.dev/grbr-calc/sitemap.xml`
+  - `https://kumoito.dev/sitemap-tier-table-maker.xml`
+  - `https://kumoito.dev/sitemap-grbr-calc.xml`
+- サービス配下（`/tier-table-maker/`, `/grbr-calc/`）は各アプリのデプロイで上書きされうるため、sitemap はルート配下で管理する。
