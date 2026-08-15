@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>プライバシーポリシー | Stream Audio Tuner</title>
+  <meta name="description" content="Chrome 拡張機能 Stream Audio Tuner のプライバシーポリシー">
+  <link rel="canonical" href="https://kumoito.dev/stream-audio-tuner/privacy.html">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", sans-serif;
+      background: #111318;
+      color: #e8eaf1;
+      line-height: 1.9;
+    }
+    main { max-width: 720px; margin: 0 auto; padding: 56px 24px 80px; }
+    h1 { font-size: 26px; margin-bottom: 8px; }
+    .app-name { color: #aaa4ff; }
+    .meta { color: #8e94a7; font-size: 13px; margin-bottom: 40px; }
+    h2 {
+      font-size: 18px; margin: 36px 0 12px; padding-bottom: 8px;
+      border-bottom: 1px solid #2c303c;
+    }
+    p, li { font-size: 15px; color: #c9cddb; }
+    ul { padding-left: 22px; margin: 8px 0; }
+    li { margin: 4px 0; }
+    strong { color: #e8eaf1; }
+    footer {
+      max-width: 720px; margin: 0 auto; padding: 0 24px 56px;
+      color: #8e94a7; font-size: 13px;
+    }
+    footer a { color: #aaa4ff; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1><span class="app-name">Stream Audio Tuner</span> プライバシーポリシー</h1>
+    <p class="meta">2026 年 8 月 15 日 制定</p>
+
+    <p>Chrome 拡張機能 Stream Audio Tuner（以下、本拡張機能）のプライバシーポリシーです。</p>
+
+    <h2>データの収集</h2>
+    <p>本拡張機能は、個人情報を収集しません。</p>
+    <p>閲覧履歴、視聴した配信の内容、入力内容を取得することも、外部へ送信することもありません。</p>
+
+    <h2>保存するデータ</h2>
+    <p>音声調整の設定値（プリセット、スライダーの値、有効と無効の状態）だけを、ブラウザ内の拡張機能ストレージ（chrome.storage.local）にサイト単位で保存します。</p>
+    <p>この設定は利用者の端末内にのみ保存され、外部のサーバーへは送信されません。</p>
+
+    <h2>外部との通信</h2>
+    <p>本拡張機能は、外部サーバーとの通信を行いません。</p>
+    <p>リモートコードの読み込みも行いません。</p>
+
+    <h2>権限の利用目的</h2>
+    <ul>
+      <li><strong>storage</strong>：音声調整の設定をサイト単位で保存するために使用します。</li>
+      <li><strong>youtube.com / twitch.tv へのアクセス</strong>：対象サイトのページ内にある動画と音声の要素へ、Web Audio API の処理を接続するために使用します。</li>
+    </ul>
+
+    <h2>設定の削除</h2>
+    <p>本拡張機能をアンインストールすると、保存された設定もすべて削除されます。</p>
+
+    <h2>改定</h2>
+    <p>本ポリシーを変更する場合は、このページを更新します。</p>
+  </main>
+  <footer>
+    <a href="https://kumoito.dev/">kumoito.dev</a>
+  </footer>
+</body>
+</html>
