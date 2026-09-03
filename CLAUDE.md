@@ -32,7 +32,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 │   ├── og.png              # OGP 画像
 │   ├── mana001.png, mana002.png  # 立ち絵
 │   ├── join-discord.png    # Discord CTA 画像
-│   └── *.svg               # SNS アイコン（twitch, youtube, twitter, instagram, fanbox, amazon）
+│   └── *.svg               # SNS・支援サイトアイコン（twitch, youtube, twitter, instagram, fanbox, amazon, buymeacoffee, patreon, github-sponsors）
 └── README.md
 ```
 
@@ -49,7 +49,7 @@ open index.html
 セクションは `<!-- セクション名 - start -->` / `<!-- セクション名 - end -->` コメントで区切られている:
 - `hero` - ヒーロー領域（背景画像 + ナビゲーション + キャッチコピー）
 - `profile` - プロフィール（自己紹介 + 立ち絵画像）
-- `links` - SNS リンク集（Twitch, YouTube, Twitter, Instagram, Fanbox, Amazon）
+- `links` - SNS・支援サイトリンク集（Twitch, YouTube, Twitter, Instagram, Fanbox, Amazon, Buy Me a Coffee, Patreon, GitHub Sponsors）
 - `discord cta` - Discord サーバー参加 CTA
 - `footer` - フッター
 
