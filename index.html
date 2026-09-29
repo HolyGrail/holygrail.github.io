@@ -52,7 +52,7 @@
 
     /* ---------- 糸（スクロール連動） ---------- */
     .thread { position: fixed; left: 30px; top: 0; bottom: 0; width: 28px; z-index: 30; pointer-events: none; }
-    .thread .line { position: absolute; left: 13.5px; top: 0; width: 1px; height: var(--p, 8%); background: linear-gradient(var(--gold-soft), var(--gold)); }
+    .thread .line { position: absolute; left: 13.5px; top: 0; width: 1px; height: var(--p, 8%); transform-origin: top; background: linear-gradient(var(--gold-soft), var(--gold)); }
     .thread .spider { position: absolute; left: 0; top: var(--p, 8%); width: 28px; height: 28px; }
     .thread .spider svg { width: 28px; height: 28px; animation: sway 4s ease-in-out infinite; transform-origin: 50% 0; }
     /* イースターエッグ：蜘蛛だけはつつけるようにする。見た目より少し広く反応させる */
@@ -369,7 +369,9 @@
 
   // スクロールに合わせて蜘蛛が糸を伸ばして降りてくる
   const thread = document.querySelector('.thread');
+  let threadFrozen = false; // イースターエッグの演出中は蜘蛛の位置を固定する
   const onScroll = () => {
+    if (threadFrozen) return;
     const max = document.documentElement.scrollHeight - innerHeight;
     const ratio = max > 0 ? scrollY / max : 0;
     thread.style.setProperty('--p', (8 + ratio * 84).toFixed(2) + '%');
@@ -402,6 +404,7 @@
 
     async function play() {
       busy = true;
+      if (!reduce.matches) threadFrozen = true;
       const s = spider.getBoundingClientRect();
       const x = s.left + s.width / 2;
       const egg = el('egg', document.body);
@@ -464,12 +467,16 @@
       egg.remove();
       await sleep(900);
 
-      // 5. 上から新しい糸と蜘蛛が降りてくる
+      // 5. 固定を解き、いまのスクロール位置へ向けて、上から新しい糸と蜘蛛が降りてくる
+      //    降下中にスクロールされても行き先がずれないよう、位置ではなく元の位置からのずれ（transform）で動かす
+      threadFrozen = false;
+      onScroll();
       falling[0].cancel();
       recoil.cancel();
+      const from = -(spider.getBoundingClientRect().top + 32);
       await Promise.all([
-        line.animate([{ height: '0px' }, { height: getComputedStyle(line).height }], { duration: 1400, easing: 'cubic-bezier(.2,.7,.2,1)' }).finished,
-        spider.animate([{ top: '-32px' }, { top: getComputedStyle(spider).top }], { duration: 1400, easing: 'cubic-bezier(.2,.7,.2,1)' }).finished
+        line.animate([{ transform: 'scaleY(0)' }, { transform: 'scaleY(1)' }], { duration: 1400, easing: 'cubic-bezier(.2,.7,.2,1)' }).finished,
+        spider.animate([{ transform: `translateY(${from}px)` }, { transform: 'none' }], { duration: 1400, easing: 'cubic-bezier(.2,.7,.2,1)' }).finished
       ]);
       busy = false;
     }
