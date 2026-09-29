@@ -12,7 +12,7 @@
     gtag('config', 'G-FDEZFMDWSK');
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="蜘蛛糸まな（Kumoito Mana）のポータルサイト。Ruby on Rails エンジニア / VTuber。配信・SNS・コミュニティへのリンク集。">
+  <meta name="description" content="蜘蛛糸まな（Kumoito Mana）のポータルサイト。Ruby on Rails をメインにしたウェブアプリケーションエンジニア / VTuber。個人開発しているサービスと、配信・SNS・コミュニティへのリンクをまとめています。">
   <link rel="canonical" href="https://kumoito.dev/" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@HolyGrail" />
@@ -20,7 +20,7 @@
   <meta property="og:url" content="https://kumoito.dev/" />
   <meta property="og:title" content="蜘蛛糸まなポータル" />
   <meta property="og:type" content="website" />
-  <meta property="og:description" content="蜘蛛糸まなのポータルサイト" />
+  <meta property="og:description" content="蜘蛛糸まな（Kumoito Mana）のポータルサイト。Ruby on Rails をメインにしたウェブアプリケーションエンジニア / VTuber。個人開発しているサービスと、配信・SNS・コミュニティへのリンクをまとめています。" />
   <meta property="og:image" content="https://kumoito.dev/img/og.png" />
   <link rel="icon" type="image/png" href="/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -101,6 +101,7 @@
     .sec-head .en { font-family: var(--latin); font-style: italic; font-size: 20px; color: var(--gold); }
     .sec-head h2 { margin: 0; font-family: var(--mincho); font-weight: 800; font-size: clamp(28px, 3.6vw, 40px); line-height: 1.4; letter-spacing: .1em; }
 
+    .profile > *, .discord > * { min-width: 0; }
     .profile { display: grid; grid-template-columns: 1fr 360px; gap: 80px; align-items: center; }
     .profile .text p { margin: 0 0 28px; font-size: 17px; line-height: 2.3; }
     .profile .text p:first-child { font-family: var(--mincho); font-size: 22px; font-weight: 700; line-height: 1.9; }
@@ -120,7 +121,8 @@
     .svc-list h3 { margin: 4px 0 0; font-family: var(--mincho); font-weight: 700; font-size: 22px; line-height: 1.5; letter-spacing: .06em; transition: color .2s; }
     .svc-list a:hover h3 { color: var(--lavender); }
     .svc-list p { margin: 0; font-size: 15px; line-height: 2; color: var(--sub); }
-    .svc-list .url { display: block; margin-top: 8px; font-family: var(--latin); font-style: italic; font-size: 15px; color: var(--ink); }
+    .svc-list a > * { min-width: 0; }
+    .svc-list .url { overflow-wrap: anywhere; display: block; margin-top: 8px; font-family: var(--latin); font-style: italic; font-size: 15px; color: var(--ink); }
     .svc-list .arrow { font-family: var(--latin); font-size: 22px; color: var(--gold); transition: transform .3s; }
     .svc-list a:hover .arrow { transform: translate(4px, -4px); }
     .svc-note { margin: -40px 0 40px; color: var(--sub); }
@@ -134,7 +136,8 @@
     .node { position: absolute; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; gap: 6px; width: 110px; text-align: center; }
     .node .dot { width: 56px; height: 56px; display: grid; place-items: center; border-radius: 50%; background: #fff; box-shadow: 0 0 0 1px var(--line); transition: box-shadow .3s, transform .3s; }
     .node .dot img { width: 26px; height: 26px; }
-    .node span:not(.dot) { padding: 0 6px; background: var(--paper); }
+    .node span:not(.dot) { padding: 0 6px; background: var(--paper); word-break: keep-all; }
+    .node span.wide-only { padding: 0; }
     .node span { font-size: 12px; line-height: 1.4; color: var(--sub); letter-spacing: .06em; transition: color .2s; }
     .node:hover .dot { box-shadow: 0 0 0 1px var(--gold), 0 0 0 5px rgba(227,195,92,.3); transform: scale(1.08); }
     .node:hover span { color: var(--ink); }
@@ -201,7 +204,10 @@
       .node .dot img { width: 18px; height: 18px; }
       .node span:not(.dot) { padding: 0 3px; letter-spacing: 0; }
       .node span { font-size: 10px; }
-      .facts { grid-template-columns: 1fr 1fr; gap: 16px 32px; }
+      /* 狭い画面では補足を省き、ラベルを短くして巣の形を保つ（読み上げ名は aria-label で補う） */
+      .node span.wide-only { display: none; }
+      .facts { grid-template-columns: 1fr 1fr; gap: 16px 24px; }
+      .facts dd { font-size: 20px; }
     }
   </style>
 </head>
@@ -246,7 +252,7 @@
 </nav>
 
 <section class="hero">
-  <div class="visual"><img src="./img/hero.png" alt="蜘蛛糸まなヘッダーイメージ" /></div>
+  <div class="visual"><img src="./img/hero.png" alt="眼鏡に手を添える蜘蛛糸まなのイラスト" /></div>
   <svg class="web-deco" id="hero-web" viewBox="0 0 200 200" aria-hidden="true"></svg>
   <div class="copy">
     <h1>蜘蛛糸まな</h1>
@@ -266,16 +272,16 @@
   <div class="sec-head reveal"><span class="kanji" aria-hidden="true">壱</span><span class="en">Profile</span><h2>蜘蛛糸まな</h2></div>
   <div class="profile">
     <div class="text reveal">
-      <p>Ruby on Rails をメインにしたウェブアプリケーションエンジニア</p>
-      <p>Rails歴は10年以上、現在は会社員として働きながら、個人として配信活動も行っている</p>
-      <p>2017年末にVTuberを知り、その文化に触れ、より近い場所で文化を楽しむために2019年1月よりVTuberとしての活動を開始</p>
+      <p>Ruby on Rails をメインにしたウェブアプリケーションエンジニア。</p>
+      <p>Rails 歴は 10 年以上、現在は会社員として働きながら、個人として配信活動も行っている。</p>
+      <p>2017 年末に VTuber を知り、その文化に触れ、より近い場所で文化を楽しむために 2019 年 1 月より VTuber としての活動を開始。</p>
       <dl class="facts">
-        <div><dt>RAILS</dt><dd>十年以上</dd></div>
+        <div><dt>RAILS</dt><dd>10 年以上</dd></div>
         <div><dt>VTUBER</dt><dd>2019.01〜</dd></div>
-        <div><dt>STREAM</dt><dd>Twitch</dd></div>
+        <div><dt>STREAM</dt><dd>Twitch / YouTube</dd></div>
       </dl>
     </div>
-    <div class="portrait reveal"><img src="./img/mana002.png" loading="lazy" alt="蜘蛛糸まな 立ち絵" /></div>
+    <div class="portrait reveal"><img src="./img/mana002.png" loading="lazy" alt="蜘蛛糸まなの全身の立ち絵" /></div>
   </div>
 </section>
 <!-- profile - end -->
@@ -283,14 +289,14 @@
 <!-- services - start -->
 <section id="services" class="block">
   <div class="sec-head reveal"><span class="kanji" aria-hidden="true">弐</span><span class="en">Services</span><h2>運用しているサービス</h2></div>
-  <p class="svc-note reveal">個人で開発・運用しているWebサービス、アプリ、ブラウザ拡張です。</p>
+  <p class="svc-note reveal">個人で開発・運用している Web サービス、Windows アプリ、Chrome 拡張機能です。</p>
   <ul class="svc-list">
-    <li class="reveal"><a href="https://kumoito.dev/tier-table-maker/" target="_blank" rel="noopener noreferrer"><span class="no">01</span><div><span class="type">Web Tool</span><h3>Tier Table Maker</h3></div><p>画像をアップロードして、ブラウザ上で手軽にTier表を作成できるサービス。<span class="url">kumoito.dev/tier-table-maker</span></p><span class="arrow">↗</span></a></li>
-    <li class="reveal"><a href="https://gbf-connect.com/" target="_blank" rel="noopener noreferrer"><span class="no">02</span><div><span class="type">Community</span><h3>グラコネ</h3></div><p>グラブル騎空団・団員募集と団活マッチング。あなたにぴったりの騎空団やDiscordサーバーが見つかるコミュニティ。<span class="url">gbf-connect.com</span></p><span class="arrow">↗</span></a></li>
-    <li class="reveal"><a href="https://kumoito.dev/setlist-generator-for-traktor/" target="_blank" rel="noopener noreferrer"><span class="no">03</span><div><span class="type">Web Tool</span><h3>Traktor セットリストジェネレーター</h3></div><p>Traktor の History ファイルから DJ セットリストを生成。CSV と SNS シェア向けカード画像で書き出せる、完全クライアントサイドのWebツール。<span class="url">kumoito.dev/setlist-generator-for-traktor</span></p><span class="arrow">↗</span></a></li>
-    <li class="reveal"><a href="https://chromewebstore.google.com/detail/stream-audio-tuner/phkckmidnpbbanjcdjipiemklaekfele" target="_blank" rel="noopener noreferrer"><span class="no">04</span><div><span class="type">Chrome Extension</span><h3>Stream Audio Tuner</h3></div><p>YouTube や Twitch の配信音声をチャンネルごとに調整できるChrome拡張機能。設定は端末内に保存され、外部へ送信されません。<span class="url">Chrome ウェブストア</span></p><span class="arrow">↗</span></a></li>
-    <li class="reveal"><a href="https://katate.kumoito.dev/" target="_blank" rel="noopener noreferrer"><span class="no">05</span><div><span class="type">Windows App</span><h3>Katate（片手）</h3></div><p>左手の WASD だけでページをめくれる Windows 用の漫画ビューワー。DRM フリーの同人誌を zip や画像フォルダーのまま展開せずに読めます。無料。<span class="url">katate.kumoito.dev</span></p><span class="arrow">↗</span></a></li>
-    <li class="reveal"><a href="https://comicshrinker.kumoito.dev/" target="_blank" rel="noopener noreferrer"><span class="no">06</span><div><span class="type">Windows App</span><h3>ComicShrinker</h3></div><p>cbz / cbr / 7z などの画像書庫を、画質そのままに小さくする Windows 用アプリ。JPEG も PNG もピクセル同一のまま再圧縮し、1 枚ずつ元と比較して確かめてから格納します。無料。<span class="url">comicshrinker.kumoito.dev</span></p><span class="arrow">↗</span></a></li>
+    <li class="reveal"><a href="https://kumoito.dev/tier-table-maker/" target="_blank" rel="noopener noreferrer"><span class="no">01</span><div><span class="type">Web Tool</span><h3>Tier Table Maker</h3></div><p>手持ちの画像をドラッグ&amp;ドロップで S〜D の 5 段に振り分け、タイトル付きの Tier 表を PNG で保存できる Web ツール。画像はブラウザ内で処理し、ログインも不要です。<span class="url">kumoito.dev/tier-table-maker</span></p><span class="arrow">↗</span></a></li>
+    <li class="reveal"><a href="https://gbf-connect.com/" target="_blank" rel="noopener noreferrer"><span class="no">02</span><div><span class="type">Community</span><h3>グラコネ</h3></div><p>グラブルの騎空士をつなぐコミュニティサイト。騎空団と団員の募集、Discord サーバー探し、高難度マルチの固定パーティー募集、攻略動画の検索ができます。基本機能は無料です。<span class="url">gbf-connect.com</span></p><span class="arrow">↗</span></a></li>
+    <li class="reveal"><a href="https://kumoito.dev/setlist-generator-for-traktor/" target="_blank" rel="noopener noreferrer"><span class="no">03</span><div><span class="type">Web Tool</span><h3>Traktor セットリストジェネレーター</h3></div><p>Traktor の History（.nml）を読み込み、BPM や KEY 付きの再生順セットリストを作る Web ツール。不要な曲を除いて、CSV と SNS 向けカード画像で書き出せます。ファイルはブラウザ内だけで処理します。<span class="url">kumoito.dev/setlist-generator-for-traktor</span></p><span class="arrow">↗</span></a></li>
+    <li class="reveal"><a href="https://chromewebstore.google.com/detail/stream-audio-tuner/phkckmidnpbbanjcdjipiemklaekfele" target="_blank" rel="noopener noreferrer"><span class="no">04</span><div><span class="type">Chrome Extension</span><h3>Stream Audio Tuner</h3></div><p>YouTube と Twitch のゲーム配信で、配信者の声とゲーム音のバランスを調整できる Chrome 拡張機能。5 種類のプリセットとスライダーで操作でき、設定はチャンネルごとに端末内へ保存し、外部には送信しません。<span class="url">Chrome ウェブストア</span></p><span class="arrow">↗</span></a></li>
+    <li class="reveal"><a href="https://katate.kumoito.dev/" target="_blank" rel="noopener noreferrer"><span class="no">05</span><div><span class="type">Windows App</span><h3>Katate（片手）</h3></div><p>左手の WASD でページをめくり、Q / E で次の巻へ進める Windows 用の漫画ビューワー。zip / cbz / rar / 7z や画像フォルダーを展開せずに、右綴じの見開きで読めます。無料。<span class="url">katate.kumoito.dev</span></p><span class="arrow">↗</span></a></li>
+    <li class="reveal"><a href="https://comicshrinker.kumoito.dev/" target="_blank" rel="noopener noreferrer"><span class="no">06</span><div><span class="type">Windows App</span><h3>ComicShrinker</h3></div><p>zip / cbz / rar / 7z などの画像書庫を、リサイズせず画質そのままに小さくする Windows 用アプリ。中の JPEG や PNG をピクセル同一のまま符号化し直し、元の書庫は上書きしません。無料。<span class="url">comicshrinker.kumoito.dev</span></p><span class="arrow">↗</span></a></li>
   </ul>
 </section>
 <!-- services - end -->
@@ -305,8 +311,8 @@
     <a class="node" href="https://www.youtube.com/@KumoitoMana" target="_blank" rel="noopener noreferrer"><span class="dot"><img src="./img/youtube.svg" loading="lazy" alt="" /></span><span>YouTube</span></a>
     <a class="node" href="https://twitter.com/HolyGrail" target="_blank" rel="noopener noreferrer"><span class="dot"><img src="./img/twitter.svg" loading="lazy" alt="" /></span><span>Twitter</span></a>
     <a class="node" href="https://www.instagram.com/kumoitomana/" target="_blank" rel="noopener noreferrer"><span class="dot"><img src="./img/instagram.svg" loading="lazy" alt="" /></span><span>Instagram</span></a>
-    <a class="node" href="https://holygrail.fanbox.cc/" target="_blank" rel="noopener noreferrer"><span class="dot"><img src="./img/fanbox.svg" loading="lazy" alt="" /></span><span>Fanbox</span></a>
-    <a class="node" href="https://www.amazon.jp/hz/wishlist/ls/GPN5G32KL6QO?ref_=wl_share" target="_blank" rel="noopener noreferrer"><span class="dot"><img src="./img/amazon.svg" loading="lazy" alt="" /></span><span>Amazon</span></a>
+    <a class="node" href="https://holygrail.fanbox.cc/" target="_blank" rel="noopener noreferrer"><span class="dot"><img src="./img/fanbox.svg" loading="lazy" alt="" /></span><span>pixivFANBOX</span></a>
+    <a class="node" href="https://www.amazon.jp/hz/wishlist/ls/GPN5G32KL6QO?ref_=wl_share" target="_blank" rel="noopener noreferrer" aria-label="Amazon ほしい物リスト"><span class="dot"><img src="./img/amazon.svg" loading="lazy" alt="" /></span><span>Amazon<span class="wide-only"> ほしい物リスト</span></span></a>
     <a class="node" href="https://buymeacoffee.com/holygrail" target="_blank" rel="noopener noreferrer"><span class="dot"><img src="./img/buymeacoffee.svg" loading="lazy" alt="" /></span><span>Buy Me a Coffee</span></a>
     <a class="node" href="https://patreon.kumoito.dev/" target="_blank" rel="noopener noreferrer"><span class="dot"><img src="./img/patreon.svg" loading="lazy" alt="" /></span><span>Patreon</span></a>
     <a class="node" href="https://github.com/sponsors/HolyGrail" target="_blank" rel="noopener noreferrer"><span class="dot"><img src="./img/github-sponsors.svg" loading="lazy" alt="" /></span><span>GitHub Sponsors</span></a>
@@ -317,12 +323,12 @@
 <!-- discord cta - start -->
 <section class="block">
   <div class="discord">
-    <div class="pic reveal"><img src="./img/join-discord.png" loading="lazy" alt="Discord Community" /></div>
+    <div class="pic reveal"><img src="./img/join-discord.png" loading="lazy" alt="Discord のロゴと、大きな袋にもたれるちびキャラの蜘蛛糸まな" /></div>
     <div class="reveal">
       <span class="en">Community</span>
       <h2>蜘蛛糸まな<br>コミュニティサーバー</h2>
-      <p>蜘蛛糸まなコミュニティサーバーは、蜘蛛糸まなが運営するDiscordサーバーです。きたるツイッター終焉の日に備え、友人・知人とコミュニケーションを取ることができる場を作ろうと思い開設。どなたでもご自由にご参加できます。</p>
-      <a class="btn" href="https://discord.gg/hSmmZ2dD5r" target="_blank" rel="noopener noreferrer">Join Discord Server <span aria-hidden="true">→</span></a>
+      <p>蜘蛛糸まなが運営する Discord サーバーです。きたる Twitter 終焉の日に備え、友人・知人とコミュニケーションを取ることができる場を作ろうと思い開設しました。どなたでもご自由にご参加いただけます。</p>
+      <a class="btn" href="https://discord.gg/hSmmZ2dD5r" target="_blank" rel="noopener noreferrer">Discord に参加する <span aria-hidden="true">→</span></a>
     </div>
   </div>
 </section>

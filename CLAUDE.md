@@ -50,7 +50,8 @@ open index.html
 - `hero` - ヒーロー領域（立ち絵 + ナビゲーション + 縦書きの名前 + 右上の蜘蛛の巣）
 - `profile` - プロフィール（自己紹介 + 立ち絵画像）
 - `services` - 運用しているサービス一覧（`.svc-list` の `<li>` を 1 件ずつ並べる）
-- `links` - SNS・支援サイトリンク集（Twitch, YouTube, Twitter, Instagram, Fanbox, Amazon, Buy Me a Coffee, Patreon, GitHub Sponsors）
+- `links` - SNS・支援サイトリンク集（Twitch, YouTube, Twitter, Instagram, pixivFANBOX, Amazon ほしい物リスト, Buy Me a Coffee, Patreon, GitHub Sponsors）
+  - 「Twitter」は本人の意向で X に言い換えない
 - `discord cta` - Discord サーバー参加 CTA
 - `footer` - フッター
 
