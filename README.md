@@ -10,8 +10,8 @@ Ruby on Rails エンジニア / VTuber 蜘蛛糸まなの配信・SNS・コミ�
 
 ## 技術スタック
 
-- HTML / CSS / JavaScript（単一ファイル構成）
-- [Tailwind CSS](https://tailwindcss.com/)（CDN 経由）
+- HTML / CSS / JavaScript（単一ファイル構成、CSS フレームワークなし）
+- Google Fonts（Shippori Mincho B1 / Zen Kaku Gothic New / Cormorant Garamond）
 - GitHub Pages（ホスティング）
 
 ## ファイル構成

@@ -10,8 +10,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## アーキテクチャ
 
 - **単一ファイル構成**: サイト全体が `index.html` 1ファイルで完成（HTML + CSS + JS をインライン記述）
-- **Tailwind CSS**: CDN (`cdn.tailwindcss.com`) 経由。カスタム設定は `tailwind.config` オブジェクトで定義（フォント: Inter + Noto Sans JP、fade-in / slide-up アニメーション）
-- **Google Fonts**: Inter（英文）と Noto Sans JP（和文）を `preload` で読み込み
+- **CSS**: `<style>` タグ内の素の CSS。CSS フレームワークは使っていない
+- **Google Fonts**: Shippori Mincho B1（見出しの明朝）、Zen Kaku Gothic New（本文）、Cormorant Garamond（欧文の飾り）を `preload` で非同期に読み込み
 - **Google Analytics**: `G-FDEZFMDWSK`（gtag.js 経由）
 - **ビルドツール**: なし。ビルドステップ不要
 - **デプロイ**: `main` ブランチへの push で GitHub Pages に自動デプロイ
@@ -47,25 +47,32 @@ open index.html
 ## index.html の構造
 
 セクションは `<!-- セクション名 - start -->` / `<!-- セクション名 - end -->` コメントで区切られている:
-- `hero` - ヒーロー領域（背景画像 + ナビゲーション + キャッチコピー）
+- `hero` - ヒーロー領域（立ち絵 + ナビゲーション + 縦書きの名前 + 右上の蜘蛛の巣）
 - `profile` - プロフィール（自己紹介 + 立ち絵画像）
-- `links` - SNS・支援サイトリンク集（Twitch, YouTube, Twitter, Instagram, Fanbox, Amazon, Buy Me a Coffee, Patreon, GitHub Sponsors）
+- `services` - 運用しているサービス一覧（`.svc-list` の `<li>` を 1 件ずつ並べる）
+- `links` - SNS・支援サイトリンク集（Twitch, YouTube, Twitter, Instagram, pixivFANBOX, Amazon ほしい物リスト, Buy Me a Coffee, Patreon, GitHub Sponsors）
+  - 「Twitter」は本人の意向で X に言い換えない
 - `discord cta` - Discord サーバー参加 CTA
 - `footer` - フッター
 
 ### CSS（`<style>` タグ）
 
-カスタムアニメーション定義: `gradient-shift`, `float`, `pulse-glow`, `text-glow`, `slide-in-right`, `reveal-up`, `hero-image-pan`。
-カラーテーマは紫系グラデーション（`#667eea` → `#764ba2` → `#f093fb` → `#4facfe`）で統一。
+デザインは名前の「蜘蛛糸」と Web（蜘蛛の巣）を掛けた和文エディトリアル。色は `:root` の CSS 変数で定義する（和紙 `--paper`、墨 `--ink`、ラベンダー `--lavender`、糸の金 `--gold` など）。
+カスタムアニメーション定義: `sway`（ぶら下がる蜘蛛の揺れ）、`draw`（ヒーローの蜘蛛の巣を描く）。いずれも `prefers-reduced-motion: reduce` で止める。
+ヒーロー画像（`img/hero.png`、白背景）は `mix-blend-mode: multiply` で和紙色の背景になじませている。
 
 ### JavaScript（`<script>` タグ）
 
-- **スクロールアニメーション**: `.observe-fade` 要素を IntersectionObserver で監視し `.reveal-animated` クラスを付与
-- **パララックス**: ヒーロー背景画像のスクロール連動
-- **カーソルエフェクト**: `#cursor-glow` 要素がマウスに追従
-- **テキストスクランブル**: `TextScramble` クラスで h1/h2 ホバー時にグリッチ風効果
-- **モバイルメニュー**: `#mobile-menu-btn` / `#mobile-menu` によるオーバーレイメニュー
-- **マグネティックボタン**: `.magnetic-button` 要素がマウス位置に引き寄せられる効果
+- **スクロールアニメーション**: `.reveal` 要素を IntersectionObserver で監視し `.in` クラスを付与
+- **蜘蛛の糸**: スクロール量に合わせて `.thread` の `--p` を更新し、左端の蜘蛛が糸を伸ばして降りる
+- **蜘蛛の巣の生成**: `webPath()` が放射糸と横糸の SVG パスを作る。ヒーロー右上の `#hero-web` と、リンク集の `#web-svg` の両方で使う
+- **リンク集の配置**: `layoutWeb()` が `#web` 内の `.node` を巣の上に並べる。件数と画面幅から、ラベルが重ならない並べ方を `ring`（1 本の輪）→ `stagger`（内外の輪に互い違い）→ `list`（一覧）の順に選び、`#web` の `data-mode` に入れる
+- **モバイルメニュー**: `#menu-btn` / `#mobile-menu` / `#menu-close` によるオーバーレイメニュー
+
+### リンクやサービスを増減するとき
+
+- 各種リンクは `#web` 内の `<a class="node">` を 1 行足すか消すだけでよい。位置は `layoutWeb()` が自動で決め、HTML の並び順に真上から時計回りに置かれる。アイコンは `img/` に SVG を置いて `<span class="dot">` の中で参照する
+- サービスは `.svc-list` に `<li class="reveal">` を 1 件足す。番号（`01`〜）は手で振っているので、並べ替えたら振り直す
 
 ## 注意事項
 
