@@ -497,7 +497,8 @@
       ]);
 
       // 6. 演出中にスクロールされていたら、いまのスクロール位置まで糸と蜘蛛を一緒に動かす
-      for (let i = 0; i < 5; i++) {
+      //    移動中のスクロールも取りこぼさないよう、位置が変わらなくなるまで繰り返す（スクロールが止まれば終わる）
+      for (;;) {
         const before = getComputedStyle(spider).top;
         threadFrozen = false;
         onScroll();
